@@ -1,0 +1,1 @@
+{"name":"tenantflow-playwright","private":true,"version":"1.0.0","scripts":{"test":"playwright test"},"devDependencies":{"@playwright/test":"^1.53.2","typescript":"~5.8.3"}}

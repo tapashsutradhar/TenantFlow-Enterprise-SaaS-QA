@@ -1,0 +1,20 @@
+server:
+  port: 8080
+spring:
+  application:
+    name: tenantflow-api
+  datasource:
+    url: ${SPRING_DATASOURCE_URL:jdbc:postgresql://localhost:5432/tenantflow}
+    username: ${SPRING_DATASOURCE_USERNAME:tenantflow}
+    password: ${SPRING_DATASOURCE_PASSWORD:local-only-change-me}
+  flyway:
+    enabled: true
+management:
+  endpoints:
+    web:
+      exposure:
+        include: health,info
+tenantflow:
+  demo:
+    northwind-password: ${TENANTFLOW_NORTHWIND_PASSWORD:Northwind-Dev-Only!}
+    contoso-password: ${TENANTFLOW_CONTOSO_PASSWORD:Contoso-Dev-Only!}

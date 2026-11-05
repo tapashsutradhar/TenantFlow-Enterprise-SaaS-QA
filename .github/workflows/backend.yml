@@ -1,0 +1,30 @@
+name: Backend
+on:
+  push:
+    paths: ['backend/**', '.github/workflows/backend.yml']
+  pull_request:
+    paths: ['backend/**', '.github/workflows/backend.yml']
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    services:
+      postgres:
+        image: postgres:17-alpine
+        env:
+          POSTGRES_DB: tenantflow
+          POSTGRES_USER: tenantflow
+          POSTGRES_PASSWORD: local-only-change-me
+        ports: ['5432:5432']
+        options: >-
+          --health-cmd "pg_isready -U tenantflow -d tenantflow"
+          --health-interval 5s --health-timeout 3s --health-retries 10
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-java@v4
+        with: { distribution: temurin, java-version: '21', cache: maven }
+      - run: mvn -B test
+        working-directory: backend
+        env:
+          SPRING_DATASOURCE_URL: jdbc:postgresql://localhost:5432/tenantflow
+          SPRING_DATASOURCE_USERNAME: tenantflow
+          SPRING_DATASOURCE_PASSWORD: local-only-change-me

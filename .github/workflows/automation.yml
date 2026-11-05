@@ -1,0 +1,32 @@
+name: Automation
+on:
+  workflow_dispatch:
+jobs:
+  static-checks:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-java@v4
+        with: { distribution: temurin, java-version: '21', cache: maven }
+      - uses: actions/setup-node@v4
+        with: { node-version: '22' }
+      - run: docker compose up -d --build
+        env:
+          POSTGRES_PASSWORD: local-only-change-me
+          NORTHWIND_PASSWORD: Northwind-Dev-Only!
+          CONTOSO_PASSWORD: Contoso-Dev-Only!
+      - run: for attempt in {1..30}; do curl -fsS http://localhost:8080/actuator/health && exit 0; sleep 2; done; exit 1
+      - run: mvn -B test
+        working-directory: automation/api
+      - run: npm ci
+        working-directory: automation/playwright
+      - run: npx playwright install --with-deps chromium && npm test
+        working-directory: automation/playwright
+        env: { CI: 'true' }
+      - if: always()
+        run: docker compose down -v
+        env:
+          POSTGRES_PASSWORD: local-only-change-me
+          NORTHWIND_PASSWORD: Northwind-Dev-Only!
+          CONTOSO_PASSWORD: Contoso-Dev-Only!
+
