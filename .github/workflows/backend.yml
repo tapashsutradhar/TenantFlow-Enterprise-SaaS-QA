@@ -13,7 +13,7 @@ jobs:
         env:
           POSTGRES_DB: tenantflow
           POSTGRES_USER: tenantflow
-          POSTGRES_PASSWORD: local-only-change-me
+          POSTGRES_PASSWORD: local-only-demo
         ports: ['5432:5432']
         options: >-
           --health-cmd "pg_isready -U tenantflow -d tenantflow"
@@ -26,5 +26,5 @@ jobs:
         working-directory: backend
         env:
           SPRING_DATASOURCE_URL: jdbc:postgresql://localhost:5432/tenantflow
-          SPRING_DATASOURCE_USERNAME: tenantflow
-          SPRING_DATASOURCE_PASSWORD: local-only-change-me
+          SPRING_DATASOURCE_USERNAME: tenantflowdemo
+          SPRING_DATASOURCE_PASSWORD: local-only-demo

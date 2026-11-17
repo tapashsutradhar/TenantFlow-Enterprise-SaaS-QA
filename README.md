@@ -27,7 +27,7 @@ docker compose up --build
 
 Open <http://localhost:5173>. The API is at <http://localhost:8080/api>; health check: <http://localhost:8080/actuator/health>.
 
-Demo accounts (change these in `.env` before running): `admin@northwind.test` / `Northwind-Dev-Only!` and `admin@contoso.test` / `Contoso-Dev-Only!`. Each account belongs to exactly one tenant. Keep `.env` out of Git; never use these credentials outside a local demo.
+Demo accounts (change these in `.env` before running): `demo@northwind.test` / `Northwind-pass!` and `demo@contoso.test` / `Contoso-pass!`. Each account belongs to exactly one tenant. Keep `.env` out of Git; never use these credentials outside a local demo.
 
 To stop the services:
 
@@ -65,6 +65,73 @@ automation/playwright/    Playwright UI and tenant-isolation checks
 automation/selenium/      Selenium WebDriver Java UI checks
 docs/                     Product, architecture, security and QA documents
 .github/workflows/        Backend, frontend and automation CI
+```
+
+
+```
+TenantFlow-Enterprise-SaaS-QA/
+├── .env.example
+├── .github/
+│   └── workflows/
+│       ├── automation.yml
+│       ├── backend.yml
+│       └── frontend.yml
+├── .gitignore
+├── README.md
+├── automation/
+│   ├── api/
+│   │   ├── pom.xml
+│   │   └── src/test/java/com/tenantflow/qa/TenantIsolationApiTest.java
+│   ├── playwright/
+│   │   ├── package-lock.json
+│   │   ├── package.json
+│   │   ├── playwright.config.ts
+│   │   └── tests/workspace.spec.ts
+│   ├── selenium/
+│   │   ├── pom.xml
+│   │   └── src/test/java/com/tenantflow/qa/WorkspaceLoginTest.java
+│   └── sql/
+│       └── assert-tenant-integrity.sql
+├── backend/
+│   ├── .dockerignore
+│   ├── Dockerfile
+│   ├── pom.xml
+│   └── src/
+│       ├── main/
+│       │   ├── java/com/tenantflow/
+│       │   │   ├── TenantFlowApplication.java
+│       │   │   ├── config/SecurityConfig.java
+│       │   │   ├── directory/DirectoryController.java
+│       │   │   └── security/
+│       │   │       ├── DatabaseUserDetailsService.java
+│       │   │       └── TenantUserDetails.java
+│       │   └── resources/
+│       │       ├── application.yml
+│       │       └── db/migration/V1__tenant_directory.sql
+│       └── test/java/com/tenantflow/directory/DirectoryControllerTest.java
+├── docker-compose.yml
+├── docs/
+│   ├── ARCHITECTURE.md
+│   ├── IMPLEMENTATION-STATUS.md
+│   ├── PRD.md
+│   ├── QA-GUIDE.md
+│   ├── SECURITY.md
+│   ├── TEST-CASES.md
+│   └── TEST-PLAN.md
+└── frontend/
+    ├── .dockerignore
+    ├── Dockerfile
+    ├── index.html
+    ├── package-lock.json
+    ├── package.json
+    ├── tsconfig.json
+    ├── vite.config.ts
+    └── src/
+        ├── App.tsx
+        ├── api.ts
+        ├── main.tsx
+        ├── styles.css
+        └── vite-env.d.ts
 ```
 
 ## Scope
