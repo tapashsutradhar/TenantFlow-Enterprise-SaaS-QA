@@ -27,7 +27,7 @@ docker compose up --build
 
 Open <http://localhost:5173>. The API is at <http://localhost:8080/api>; health check: <http://localhost:8080/actuator/health>.
 
-Demo accounts (change these in `.env` before running): `demo@northwind.test` / `Northwind-pass!` and `demo@contoso.test` / `Contoso-pass!`. Each account belongs to exactly one tenant. Keep `.env` out of Git; never use these credentials outside a local demo.
+Demo accounts (change these in `.env` before running): `admin@northwind.test` / `Northwind-Dev-Only!` and `admin@contoso.test` / `Contoso-Dev-Only!`. Each account belongs to exactly one tenant. Keep `.env` out of Git; never use these credentials outside a local demo.
 
 To stop the services:
 
@@ -66,7 +66,6 @@ automation/selenium/      Selenium WebDriver Java UI checks
 docs/                     Product, architecture, security and QA documents
 .github/workflows/        Backend, frontend and automation CI
 ```
-
 
 ```
 TenantFlow-Enterprise-SaaS-QA/

@@ -26,7 +26,7 @@ jobs:
       - if: always()
         run: docker compose down -v
         env:
-          POSTGRES_PASSWORD: local-only-test
-          NORTHWIND_PASSWORD: Northwind-demo!
-          CONTOSO_PASSWORD: Contoso-Demo!
+          POSTGRES_PASSWORD: local-only-change-me
+          NORTHWIND_PASSWORD: Northwind-Dev-Only!
+          CONTOSO_PASSWORD: Contoso-Dev-Only!
 

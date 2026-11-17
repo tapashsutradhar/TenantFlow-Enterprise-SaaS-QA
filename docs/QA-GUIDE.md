@@ -50,9 +50,9 @@ FROM app_user u JOIN tenant t ON t.id = u.tenant_id
 ORDER BY t.slug, u.email;
 ```
 
-To inspect the isolation predicate used by the API, compare the expected result for the Northwind tenant UUID `c9c111c2-12ce-48d5-bec3-4f111f3d2c11`:
+To inspect the isolation predicate used by the API, compare the expected result for the Northwind tenant UUID `c9c908c2-12ce-48d5-bec3-4f808f3d2c11`:
 
 ```sql
 SELECT email FROM app_user
-WHERE tenant_id = 'c9c111c2-12ce-48d5-bec3-4f111f3d2c11';
+WHERE tenant_id = 'c9c908c2-12ce-48d5-bec3-4f808f3d2c11';
 ```
